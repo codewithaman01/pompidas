@@ -4,342 +4,375 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pompi Das | Assistant Professor of Mathematics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         :root {
             --primary: #0f172a;
-            --secondary: #3b82f6;
-            --accent: #f8fafc;
-            --text-main: #1e293b;
-            --text-light: #64748b;
-            --white: #ffffff;
-            --border: #e2e8f0;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --glass: rgba(255, 255, 255, 0.03);
+            --text-bright: #f8fafc;
+            --text-dim: #94a3b8;
+            --bg-dark: #020617;
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease; }
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-bright);
             line-height: 1.6;
-            background-color: #f8fafc;
-            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* Full Width Header */
+        /* Animated Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Full Width Animated Header */
         header {
-            background: var(--primary);
-            color: #fff;
-            padding: 60px 5%;
-            text-align: left;
-            border-bottom: 4px solid var(--secondary);
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 8%;
+            background: linear-gradient(to right, #0f172a, transparent);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         header h1 {
-            margin: 0;
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin: 0;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s;
         }
 
         header h2 {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            color: var(--accent);
             font-weight: 300;
-            color: #94a3b8;
-            letter-spacing: 1px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             margin: 10px 0;
+            animation: fadeInUp 1s;
         }
 
-        .contact-bar {
+        .contact-info {
             display: flex;
-            gap: 30px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 30px;
             flex-wrap: wrap;
+            animation: fadeIn 2s;
+        }
+
+        .contact-tag {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
             font-size: 0.9rem;
+            backdrop-filter: blur(10px);
         }
 
-        /* Full Width Layout Wrapper */
-        .wrapper {
-            width: 100%;
-            padding: 40px 5%;
+        /* Responsive Grid Wrapper */
+        .main-content {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Two column wide layout */
-            gap: 30px;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            padding: 50px 5%;
         }
 
-        @media (max-width: 1100px) {
-            .wrapper { grid-template-columns: 1fr; }
-        }
-
+        /* Glassmorphism Sections */
         section {
-            background: var(--white);
-            padding: 35px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            height: fit-content;
+            grid-column: span 6; /* Half width */
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border 0.4s;
         }
 
-        /* Force some sections to span full width even in grid */
-        .full-span {
-            grid-column: 1 / -1;
+        section:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        section h3 {
+        .full-width { grid-column: span 12; }
+
+        h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: var(--primary);
+            font-size: 2rem;
             margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary);
-            margin-bottom: 20px;
-        }
-
-        /* Data Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            color: var(--accent);
+            display: flex;
+            align-items: center;
             gap: 15px;
         }
 
-        .info-item {
-            background: var(--accent);
-            padding: 12px 20px;
-            border-radius: 6px;
-            border-left: 3px solid var(--secondary);
+        h3::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(to right, var(--accent), transparent);
         }
 
-        /* List Styling */
-        ul { list-style: none; padding: 0; margin: 0; }
-        
-        li {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
+        /* Timeline / List Styling */
+        .item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid rgba(99, 102, 241, 0.3);
         }
 
-        li:last-child { border-bottom: none; }
+        .item:hover { border-left-color: var(--accent); }
 
         .date {
-            color: var(--secondary);
+            font-size: 0.8rem;
             font-weight: 700;
-            font-size: 0.85rem;
+            color: var(--accent);
+            letter-spacing: 1px;
             display: block;
-            margin-bottom: 4px;
         }
 
-        .job-title {
+        .title {
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--primary);
+            display: block;
+            margin: 5px 0;
         }
 
-        /* Research Items */
-        .research-card {
-            background: #fff;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
+        /* Skill Bubbles */
+        .skill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .research-card:hover {
-            border-color: var(--secondary);
-            background: #f0f7ff;
+        .skill-pill {
+            background: rgba(99, 102, 241, 0.1);
+            color: #a5b4fc;
+            padding: 8px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.9rem;
         }
 
-        .issn-tag {
-            background: #1e293b;
+        /* Paper Cards */
+        .paper-card {
+            background: rgba(255,255,255,0.02);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+        }
+
+        .paper-card:hover {
+            background: rgba(99, 102, 241, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .badge {
+            background: var(--accent);
             color: white;
-            padding: 2px 8px;
-            font-size: 0.75rem;
+            padding: 3px 10px;
             border-radius: 4px;
+            font-size: 0.7rem;
             margin-right: 10px;
         }
 
-        /* Skills */
-        .skill-box {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: #e2e8f0;
-            padding: 6px 15px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
+        /* Footer */
         footer {
-            background: var(--primary);
-            color: white;
-            padding: 40px 5%;
             text-align: center;
-            margin-top: 40px;
+            padding: 80px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-dim);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            section { grid-column: span 12; }
+            header { height: auto; padding: 100px 5%; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Pompi Das</h1>
-    <h2>Assistant Professor of Mathematics | Research Scholar</h2>
-    <div class="contact-bar">
-        <span>📍 Haveri, Karnataka – India</span>
-        <span>📞 +91 91018 74990</span>
-        <span>✉️ pompidas689@gmail.com</span>
+    <h1 class="animate__animated animate__fadeInLeft">Pompi Das</h1>
+    <h2 class="animate__animated animate__fadeInLeft animate__delay-1s">Assistant Professor of Mathematics</h2>
+    <div class="contact-info">
+        <div class="contact-tag">📍 Haveri, Karnataka – India</div>
+        <div class="contact-tag">📞 +91 91018 74990</div>
+        <div class="contact-tag">✉️ pompidas689@gmail.com</div>
     </div>
 </header>
 
-<div class="wrapper">
+<div class="main-content">
     
-    <section class="full-span">
+    <section class="full-width">
         <h3>About Me</h3>
-        <p>
-            My name is <strong>Pompi Das</strong> and I am a research scholar in Mathematics. I am currently working as an Assistant Professor of Mathematics. I have been teaching mathematics for the past 4 years. I am a flexible, hardworking, and proactive professional with strong verbal and written communication skills, project management abilities, and time management skills.
+        <p style="font-size: 1.1rem; color: var(--text-dim);">
+            My name is <strong>Pompi Das</strong> and I am a research scholar in Mathematics. Currently working as an 
+            <strong>Assistant Professor of Mathematics</strong> with 4 years of experience. I am a flexible, 
+            hardworking, and proactive professional with strong verbal and written communication skills, project 
+            management abilities, and time management skills.
         </p>
-        <p>
-            I am eager to assist both struggling and advanced students to improve understanding and academic performance. I am confident in helping students excel through individual and small group instruction. My focus is on improving student academic performance and test readiness.
+        <p style="color: var(--text-dim);">
+            I am eager to assist both struggling and advanced students to improve understanding and academic 
+            performance through individual and small group instruction.
         </p>
     </section>
 
     <section>
         <h3>Personal Details</h3>
-        <div class="info-grid">
-            <div class="info-item"><strong>Date of Birth:</strong> 01 April 1999</div>
-            <div class="info-item"><strong>Eligible to Work In:</strong> India</div>
-            <div class="info-item"><strong>Total Experience:</strong> 4 Years</div>
-            <div class="info-item"><strong>Industry:</strong> Mathematics</div>
-            <div class="info-item"><strong>Relocation:</strong> Anywhere</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div><span class="date">DOB</span> 01 April 1999</div>
+            <div><span class="date">ELIGIBILITY</span> India</div>
+            <div><span class="date">EXPERIENCE</span> 4 Years</div>
+            <div><span class="date">RELOCATION</span> Anywhere</div>
         </div>
     </section>
 
     <section>
-        <h3>Skills & Languages</h3>
-        <div class="skill-box">
-            <span class="skill-tag">Organisational Skills</span>
-            <span class="skill-tag">Computer Skills</span>
-            <span class="skill-tag">Statistics</span>
-            <span class="skill-tag">M.Sc Level Mathematics</span>
-            <span class="skill-tag">Communication</span>
-            <span class="skill-tag">Leadership</span>
-            <span class="skill-tag">Microsoft Office</span>
+        <h3>Skills & Expertise</h3>
+        <div class="skill-container">
+            <span class="skill-pill">Organisational Skills</span>
+            <span class="skill-pill">Computer Skills</span>
+            <span class="skill-pill">Statistics</span>
+            <span class="skill-pill">M.Sc Level Mathematics</span>
+            <span class="skill-pill">Communication</span>
+            <span class="skill-pill">Leadership</span>
+            <span class="skill-pill">Microsoft Office</span>
         </div>
-        <p style="margin-top: 20px;"><strong>Languages:</strong> English, Assamese, Hindi, Bengali – Fluent</p>
+        <p style="margin-top:20px;"><span class="date">LANGUAGES</span> English, Assamese, Hindi, Bengali</p>
     </section>
 
     <section>
         <h3>Work Experience</h3>
-        <ul>
-            <li>
-                <span class="date">SEPTEMBER 2025 – PRESENT</span>
-                <span class="job-title">Mathematics Lecturer</span><br>
-                Vidyashlip International School and PU College – Haveri, Karnataka<br>
-                <em>Full Time | Teaching Class 11 and 12</em>
-            </li>
-            <li>
-                <span class="date">APRIL 2024 – PRESENT</span>
-                <span class="job-title">Mathematics Expert</span><br>
-                Epitome Coaching Centre – Along, Arunachal Pradesh<br>
-                <em>Part Time | Teaching Class 11, 12 & JEE Coaching</em>
-            </li>
-            <li>
-                <span class="date">JULY 2023 – AUGUST 2025</span>
-                <span class="job-title">Assistant Professor in Mathematics</span><br>
-                North East Frontier Technical University – Arunachal Pradesh<br>
-                <em>Full Time | Teaching Engineering Mathematics (B.Tech)</em>
-            </li>
-            <li>
-                <span class="date">JANUARY 2022 – FEBRUARY 2025</span>
-                <span class="job-title">Private Tutor (Mathematics)</span><br>
-                Guwahati, Assam<br>
-                <em>Part Time | Teaching Class 11 & 12</em>
-            </li>
-            <li>
-                <span class="date">MARCH 2022 – APRIL 2023</span>
-                <span class="job-title">Mathematics Teacher</span><br>
-                Maharshi Public School – Assam<br>
-                <em>Part Time | Teaching Class 9 & 10</em>
-            </li>
-        </ul>
+        <div class="item">
+            <span class="date">SEPT 2025 – PRESENT</span>
+            <span class="title">Mathematics Lecturer</span>
+            Vidyashlip International School and PU College – Haveri, Karnataka<br>
+            <em>Class 11 & 12</em>
+        </div>
+        <div class="item">
+            <span class="date">APRIL 2024 – PRESENT</span>
+            <span class="title">Mathematics Expert</span>
+            Epitome Coaching Centre – Along, Arunachal Pradesh<br>
+            <em>JEE Coaching & Class 11-12</em>
+        </div>
+        <div class="item">
+            <span class="date">JULY 2023 – AUG 2025</span>
+            <span class="title">Assistant Professor</span>
+            North East Frontier Technical University<br>
+            <em>Engineering Mathematics (B.Tech)</em>
+        </div>
+        <div class="item">
+            <span class="date">JAN 2022 – FEB 2025</span>
+            <span class="title">Private Tutor</span>
+            Guwahati, Assam<br>
+            <em>Mathematics Class 11 & 12</em>
+        </div>
+        <div class="item">
+            <span class="date">MARCH 2022 – APRIL 2023</span>
+            <span class="title">Mathematics Teacher</span>
+            Maharshi Public School – Assam<br>
+            <em>Class 9 & 10</em>
+        </div>
     </section>
 
     <section>
         <h3>Education</h3>
-        <ul>
-            <li>
-                <span class="date">AUGUST 2023 – PRESENT</span>
-                <span class="job-title">Applied Mathematics (Ph.D – On Course)</span><br>
-                The Assam Royal Global University, India
-            </li>
-            <li>
-                <span class="date">2021 – 2023</span>
-                <span class="job-title">Master’s Degree in Mathematics</span><br>
-                The Assam Royal Global University, Guwahati, Assam
-            </li>
-            <li>
-                <span class="date">2018 – 2021</span>
-                <span class="job-title">Bachelor’s Degree in Mathematics</span><br>
-                Pragjyotish College, Guwahati, Assam
-            </li>
-            <li>
-                <span class="date">Passing Year: 2018</span>
-                <span class="job-title">12th Pass</span><br>
-                Pragmatic Academy, Assam – AHSEC
-            </li>
-            <li>
-                <span class="date">Passing Year: 2015</span>
-                <span class="job-title">10th Pass</span><br>
-                Modern English School, Assam – SEBA
-            </li>
-        </ul>
+        <div class="item">
+            <span class="date">2023 – PRESENT</span>
+            <span class="title">Applied Mathematics (Ph.D – On Course)</span>
+            The Assam Royal Global University, India
+        </div>
+        <div class="item">
+            <span class="date">2021 – 2023</span>
+            <span class="title">Master’s Degree (Mathematics)</span>
+            The Assam Royal Global University, Guwahati
+        </div>
+        <div class="item">
+            <span class="date">2018 – 2021</span>
+            <span class="title">Bachelor’s Degree (Mathematics)</span>
+            Pragjyotish College, Guwahati
+        </div>
+        <div class="item">
+            <span class="date">2018</span>
+            <span class="title">12th Pass (AHSEC)</span>
+            Pragmatic Academy, Assam
+        </div>
+        <div class="item">
+            <span class="date">2015</span>
+            <span class="title">10th Pass (SEBA)</span>
+            Modern English School, Assam
+        </div>
     </section>
 
-    <section class="full-span">
-        <h3>Projects & Papers Presented</h3>
-        <div class="research-card">
-            <span class="issn-tag">ISSN: 2688-4542</span> <strong>Heat Transmission of Star Fruit Juice over a Permeable Moving Sheet with Slip Impact by Power Law Fluid Model: An Experimental to Numerical Approach on Rheology</strong> (November 2025)
+    <section class="full-width">
+        <h3>Research & Publications</h3>
+        <div class="paper-card">
+            <span class="badge">ISSN: 2688-4542</span>
+            <strong>Heat Transmission of Star Fruit Juice over a Permeable Moving Sheet with Slip Impact by Power Law Fluid Model: An Experimental to Numerical Approach on Rheology</strong> (2025)
         </div>
-
-        <div class="research-card">
+        <div class="paper-card">
             <strong>Slip Impact on the Flow and Heat Transport of Star Fruit Juice over a Permeable Moving Sheet by Power Law Fluid Model</strong><br>
-            Accepted for publication as Book Chapter and presented at Jawaharlal Nehru College, Boko, Assam
+            Accepted as Book Chapter | Presented at Jawaharlal Nehru College, Assam
         </div>
-
-        <div class="research-card">
+        <div class="paper-card">
             <strong>Mathematical Modelling of Rheology of Memang Narang (Citrus Indica) Juice through a Cylindrical Pipe by Power Law Fluid Model</strong><br>
-            Paper presented at International Conference organised by Tezpur University, Assam
+            Presented at Tezpur University, Assam
         </div>
-
-        <div class="research-card">
-            <strong>Mathematical Modelling based on Rheological Flow Parameters of Some Selected Underutilized Nutritious Juicy Fruits of North-Eastern India</strong><br>
-            <em>Ph.D Research Topic</em>
+        <div class="paper-card">
+            <span class="badge">Ph.D Topic</span>
+            <strong>Mathematical Modelling based on Rheological Flow Parameters of Some Selected Underutilized Nutritious Juicy Fruits of North-Eastern India</strong>
         </div>
-
-        <div class="research-card">
-            <span class="issn-tag">ISBN: 978-81-925832-8-0</span> <strong>Behavioural Study of Carrot Juice Exhibiting Shear-thickening Nature of Flow Past a Cylindrical Pipe by Power-Law Fluid Model</strong><br>
-            16th International Conference MSAST 2022, Kolkata, India
+        <div class="paper-card">
+            <span class="badge">ISBN: 978-81-925832-8-0</span>
+            <strong>Behavioural Study of Carrot Juice Exhibiting Shear-thickening Nature of Flow Past a Cylindrical Pipe by Power-Law Fluid Model</strong><br>
+            16th International Conference MSAST 2022, Kolkata
         </div>
-
-        <div class="research-card">
+        <div class="paper-card">
             <strong>Flow Behavioral Study of Carrot Juice past a Cylindrical Tube by Power-law Fluid Model for Manufacturing Process Design and Evaluation</strong><br>
-            Paper presented in National Conference organised by Mizoram University
+            Presented at Mizoram University
         </div>
     </section>
 
     <section>
-        <h3>Awards & Achievements</h3>
-        <ul>
-            <li>🏅 <strong>Best Presenter</strong> in National Conference 2023 organised by Mizoram University</li>
-        </ul>
+        <h3>Achievements</h3>
+        <div class="item" style="border:none;">
+            🏆 <strong>Best Presenter in National Conference 2023</strong><br>
+            Organised by Mizoram University
+        </div>
     </section>
 
     <section>
-        <h3>Additional Information</h3>
+        <h3>Additional Training</h3>
         <ul>
-            <li>🔹 Completed 6 Months Diploma Course in Computer</li>
-            <li>🔹 Completed Course on <strong>“Modelling and Simulation of Physiological Flows”</strong> at IIT Kharagpur (Dec 2024)</li>
+            <li>6 Months Diploma in Computer</li>
+            <li><strong>IIT Kharagpur:</strong> Modelling and Simulation of Physiological Flows (Dec 2024)</li>
         </ul>
     </section>
 
@@ -347,7 +380,7 @@
 
 <footer>
     <p>© 2026 Pompi Das | Academic Portfolio</p>
-    <p style="font-size: 0.8rem; opacity: 0.7;">Mathematics Department | Research & Education</p>
+    <p style="font-size: 0.8rem; opacity: 0.5;">Mathematics Research & Engineering Education</p>
 </footer>
 
 </body>
